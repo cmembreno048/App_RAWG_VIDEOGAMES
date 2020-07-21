@@ -1,48 +1,69 @@
 package ujcv.edu.listavideojuegos;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        obtenerDatosVolley();
+    }
+    private void obtenerDatosVolley() {
 
-        final TextView mititulo = (TextView) findViewById(R.id.miTitulo);
-        // ...
 
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="https://www.google.com";
+        String url = "https://api.androidhive.info/contacts/";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mititulo.setText("Response is: "+ response.substring(0,500));
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+
+                    JSONArray mJsonArray = response.getJSONArray("contacts");
+
+                    for (int i = 0 ; i<mJsonArray.length() ; i++){
+
+                        JSONObject mJsonObj = mJsonArray.getJSONObject(i);
+                        String name = mJsonObj.getString("name");
+                        Toast.makeText(MainActivity.this, "Pokemos: "+name, Toast.LENGTH_SHORT).show();
                     }
-                }, new Response.ErrorListener() {
+
+                }
+                catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mititulo.setText("That didn't work!");
+
             }
         });
 
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
+        queue.add(request);
     }
+
+
+
 }
