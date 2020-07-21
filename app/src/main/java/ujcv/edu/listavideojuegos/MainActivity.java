@@ -1,6 +1,8 @@
 package ujcv.edu.listavideojuegos;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +12,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 
 import org.json.JSONArray;
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RequestQueue queue;
 
+    private TextView nombreJuego;
+    private ImageView fotoprincipal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         obtenerDatosVolley();
     }
     private void obtenerDatosVolley() {
-
+        //nombreJuego = findViewById(R.id.juegoprincipal);
+        //fotoprincipal = findViewById(R.id.imagenprincipal);
         queue = Volley.newRequestQueue(this);
 
         String url = "https://rawg-video-games-database.p.rapidapi.com/games";
@@ -44,11 +52,21 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray mJsonArray = response.getJSONArray("results");
 
-                    for (int i = 0 ; i<mJsonArray.length() ; i++){
-                        JSONObject mJsonObj = mJsonArray.getJSONObject(i);
+                    //for (int i = 0 ; i<mJsonArray.length() ; i++){
+
+                        JSONObject mJsonObj = mJsonArray.getJSONObject(6);
+
                         String name = mJsonObj.getString("name");
-                        Toast.makeText(MainActivity.this, "juegos: "+name, Toast.LENGTH_SHORT).show();
-                    }
+                       String foto = mJsonObj.getString("background_image");
+
+                        //nombreJuego.setText(name);
+
+                        //Picasso.get()
+                         //   .load(foto)
+                         //       .resize(50, 50)
+                          //  .into(fotoprincipal);
+
+                    //}
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
