@@ -6,6 +6,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -22,26 +24,38 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import ujcv.edu.listavideojuegos.recycler_view.ItemsRecycleView;
+import ujcv.edu.listavideojuegos.recycler_view.adaptadore_items;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private RequestQueue queue;
+    private RecyclerView mrecyclerview;
+    private ArrayList<ItemsRecycleView> mExampleList;
+    private adaptadore_items mExampleAdapter;
 
-    private TextView nombreJuego;
-    private ImageView fotoprincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mrecyclerview = findViewById(R.id.recycler_view);
+        mrecyclerview.setHasFixedSize(true);
+        mrecyclerview.setLayoutManager(new LinearLayoutManager(this));
+
+        mExampleList = new ArrayList<>();
+
+
         obtenerDatosVolley();
     }
     private void obtenerDatosVolley() {
-        //nombreJuego = findViewById(R.id.juegoprincipal);
-        //fotoprincipal = findViewById(R.id.imagenprincipal);
+
         queue = Volley.newRequestQueue(this);
 
         String url = "https://rawg-video-games-database.p.rapidapi.com/games";
@@ -52,21 +66,22 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray mJsonArray = response.getJSONArray("results");
 
-                    //for (int i = 0 ; i<mJsonArray.length() ; i++){
+                    for (int i = 0 ; i<mJsonArray.length() ; i++){
 
-                        JSONObject mJsonObj = mJsonArray.getJSONObject(6);
+                        JSONObject mJsonObj = mJsonArray.getJSONObject(i);
 
-                        String name = mJsonObj.getString("name");
+                        String nombre_juego = mJsonObj.getString("name");
                        String foto = mJsonObj.getString("background_image");
+                       Double rating = mJsonObj.getDouble("rating");
 
-                        //nombreJuego.setText(name);
+                       mExampleList.add(new ItemsRecycleView(foto,nombre_juego,rating));
 
-                        //Picasso.get()
-                         //   .load(foto)
-                         //       .resize(50, 50)
-                          //  .into(fotoprincipal);
+                    }
 
-                    //}
+
+                    mExampleAdapter = new adaptadore_items(MainActivity.this, mExampleList);
+                    mrecyclerview.setAdapter(mExampleAdapter);
+
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

@@ -42,7 +42,7 @@ public class adaptadore_items extends RecyclerView.Adapter<adaptadore_items.Item
 
         holder.mtextvideojuego.setText(nombre_videojuego);
         holder.mtextrating.setText("Rating: "+Rating);
-        Picasso.get().load(urlImage).centerInside().into(holder.urlImagen);
+        Picasso.get().load(urlImage).into(holder.urlImagen);
 
     }
 
