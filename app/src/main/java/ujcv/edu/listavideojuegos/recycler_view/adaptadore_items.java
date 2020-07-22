@@ -44,6 +44,7 @@ public class adaptadore_items extends RecyclerView.Adapter<adaptadore_items.Item
         holder.mtextrating.setText("Rating: "+Rating);
         Picasso.get().load(urlImage).into(holder.urlImagen);
 
+
     }
 
     @Override
@@ -61,6 +62,7 @@ public class adaptadore_items extends RecyclerView.Adapter<adaptadore_items.Item
             urlImagen = itemView.findViewById(R.id.image_view);
             mtextvideojuego = itemView.findViewById(R.id.text_videojuego);
             mtextrating = itemView.findViewById(R.id.rating);
+
         }
     }
 

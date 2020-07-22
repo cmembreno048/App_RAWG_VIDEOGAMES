@@ -6,17 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn_previous"
+        android:layout_width="114dp"
+        android:layout_height="37dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="248dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/ovalo"
+        android:text="previous"
+        android:textColor="#00BCD4"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="114dp"
+        android:layout_height="37dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="245dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/ovalo"
+        android:text="Next"
+        android:textColor="#00BCD4" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="383dp"
-        android:layout_height="563dp"
+        android:layout_width="wrap_content"
+        android:layout_height="623dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginBottom="58dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="63dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,19 +56,28 @@
 
     <TextView
         android:id="@+id/titulo"
-        android:layout_width="340dp"
-        android:layout_height="58dp"
+        android:layout_width="410dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="Top Video Juegos 2020"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="0dp"
+        android:text="VideoGames"
         android:textAlignment="center"
-        android:textColor="#673AB7"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
+        android:textColor="#00BCD4"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/n_paginas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp"
+        android:text="Pag: "
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textStyle="italic" />
+
+
 </RelativeLayout>
